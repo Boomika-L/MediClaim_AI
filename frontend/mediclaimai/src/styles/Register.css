@@ -1,0 +1,187 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.register-container{
+
+    min-height:calc(100vh - 75px);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:60px 20px;
+
+    background:linear-gradient(135deg,#ecfdf5,#d1fae5);
+}
+
+.register-box{
+
+    width:450px;
+    max-width:100%;
+
+    background:#fff;
+
+    padding:40px;
+
+    border-radius:18px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+
+    transition:.3s ease;
+}
+
+.register-box:hover{
+
+    transform:translateY(-5px);
+}
+
+.register-box h1{
+
+    color:#059669;
+
+    text-align:center;
+
+    font-size:38px;
+
+    margin-bottom:8px;
+}
+
+.register-box p{
+
+    text-align:center;
+
+    color:#666;
+
+    margin-bottom:30px;
+
+    font-size:17px;
+}
+
+.input-group{
+
+    margin-bottom:20px;
+}
+
+.input-group label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+    color:#222;
+}
+
+.input-group input{
+
+    width:100%;
+
+    padding:14px 16px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:10px;
+
+    font-size:16px;
+
+    transition:.3s ease;
+}
+
+.input-group input:focus{
+
+    outline:none;
+
+    border:2px solid #059669;
+
+    box-shadow:0 0 10px rgba(5,150,105,.2);
+}
+
+.input-group input::placeholder{
+
+    color:#9ca3af;
+}
+
+.register-btn{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#059669;
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s ease;
+
+    margin-top:10px;
+}
+
+.register-btn:hover{
+
+    background:#047857;
+
+    transform:translateY(-2px);
+}
+
+.login-link{
+
+    margin-top:25px;
+
+    text-align:center;
+
+    color:#555;
+
+    font-size:16px;
+}
+
+.login-link a{
+
+    color:#059669;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    margin-left:5px;
+}
+
+.login-link a:hover{
+
+    text-decoration:underline;
+}
+
+@media(max-width:768px){
+
+    .register-box{
+
+        width:100%;
+
+        padding:30px 25px;
+    }
+
+    .register-box h1{
+
+        font-size:32px;
+    }
+
+    .register-box p{
+
+        font-size:15px;
+    }
+
+}

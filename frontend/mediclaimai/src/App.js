@@ -16,7 +16,7 @@ import PredictionHistory from "./pages/PredictionHistory";
 import Profile from "./pages/Profile";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsConditions from "./pages/TermsConditions";
-
+import History from "./pages/History";
 
 function App() {
   return (
@@ -24,6 +24,7 @@ function App() {
       <Navbar />
 
       <Routes>
+        <Route path="/history" element={<History />} />
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<Contact />} />

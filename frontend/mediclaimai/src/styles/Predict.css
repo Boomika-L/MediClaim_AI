@@ -1,0 +1,145 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.predict-container{
+
+    min-height:100vh;
+
+    background:#f4fffb;
+
+    padding:50px;
+
+    display:flex;
+
+    justify-content:center;
+}
+
+.predict-card{
+
+    width:900px;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
+}
+
+.predict-card h1{
+
+    text-align:center;
+
+    color:#059669;
+
+    margin-bottom:35px;
+}
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:25px;
+}
+
+.form-grid label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:bold;
+}
+
+.form-grid input,
+.form-grid select{
+
+    width:100%;
+
+    padding:14px;
+
+    border:1px solid #ccc;
+
+    border-radius:8px;
+
+    font-size:16px;
+}
+
+.form-grid input:focus,
+.form-grid select:focus{
+
+    outline:none;
+
+    border:2px solid #059669;
+}
+
+.predict-btn{
+
+    width:100%;
+
+    margin-top:35px;
+
+    padding:16px;
+
+    border:none;
+
+    background:#059669;
+
+    color:white;
+
+    font-size:18px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+}
+
+.predict-btn:hover{
+
+    background:#047857;
+}
+
+.result-card{
+
+    margin-top:40px;
+
+    background:#ecfdf5;
+
+    border-left:6px solid #059669;
+
+    padding:30px;
+
+    border-radius:10px;
+
+    text-align:center;
+}
+
+.result-card h2{
+
+    color:#065f46;
+
+    margin-bottom:15px;
+}
+
+.result-card h3{
+
+    color:#059669;
+
+    font-size:40px;
+
+    margin-bottom:10px;
+}
+
+.result-card p{
+
+    font-size:18px;
+
+    color:#444;
+}

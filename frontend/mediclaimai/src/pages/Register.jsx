@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/Register.css";
 
 function Register() {
+
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -11,25 +13,144 @@ function Register() {
     confirmPassword: ""
   });
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+
   const handleChange = (e) => {
+
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+
   };
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
+
     e.preventDefault();
 
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match");
+    setError("");
+    setSuccess("");
+
+
+    // Check password
+
+    if (
+      formData.password !==
+      formData.confirmPassword
+    ) {
+
+      setError("Passwords do not match");
+
       return;
     }
 
-    console.log(formData);
 
-    // API Call will be added later
+    // Check password length
+
+    if (formData.password.length < 6) {
+
+      setError(
+        "Password must contain at least 6 characters"
+      );
+
+      return;
+    }
+
+
+    setLoading(true);
+
+
+    try {
+
+      console.log(
+        "Sending registration data:",
+        formData
+      );
+
+
+      const response = await fetch(
+        "http://localhost:5000/api/auth/register",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify(formData)
+        }
+      );
+
+
+      const data = await response.json();
+
+
+      console.log(
+        "Register Response:",
+        data
+      );
+
+
+      if (!response.ok) {
+
+        setError(
+          data.message ||
+          "Registration failed"
+        );
+
+        setLoading(false);
+
+        return;
+      }
+
+
+      setSuccess(
+        "Registration successful! Redirecting to login..."
+      );
+
+
+      // Clear form
+
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
+      });
+
+
+      // Redirect to login
+
+      setTimeout(() => {
+
+        navigate("/login");
+
+      }, 1500);
+
+
+    } catch (error) {
+
+      console.error(
+        "Registration Error:",
+        error
+      );
+
+      setError(
+        "Unable to connect to server. Please make sure the backend is running."
+      );
+
+    } finally {
+
+      setLoading(false);
+
+    }
+
   };
+
 
   return (
 
@@ -37,15 +158,47 @@ function Register() {
 
       <div className="register-box">
 
-        <h1>Create Account</h1>
+        <h1>
+          Create Account
+        </h1>
 
-        <p>Join MediClaimAI Today</p>
+        <p>
+          Join MediClaimAI Today
+        </p>
+
+
+        {/* ERROR MESSAGE */}
+
+        {error && (
+
+          <div className="register-error">
+            {error}
+          </div>
+
+        )}
+
+
+        {/* SUCCESS MESSAGE */}
+
+        {success && (
+
+          <div className="register-success">
+            {success}
+          </div>
+
+        )}
+
 
         <form onSubmit={handleSubmit}>
 
+
+          {/* NAME */}
+
           <div className="input-group">
 
-            <label>Full Name</label>
+            <label>
+              Full Name
+            </label>
 
             <input
               type="text"
@@ -58,9 +211,14 @@ function Register() {
 
           </div>
 
+
+          {/* EMAIL */}
+
           <div className="input-group">
 
-            <label>Email</label>
+            <label>
+              Email
+            </label>
 
             <input
               type="email"
@@ -73,9 +231,14 @@ function Register() {
 
           </div>
 
+
+          {/* PASSWORD */}
+
           <div className="input-group">
 
-            <label>Password</label>
+            <label>
+              Password
+            </label>
 
             <input
               type="password"
@@ -88,9 +251,14 @@ function Register() {
 
           </div>
 
+
+          {/* CONFIRM PASSWORD */}
+
           <div className="input-group">
 
-            <label>Confirm Password</label>
+            <label>
+              Confirm Password
+            </label>
 
             <input
               type="password"
@@ -103,22 +271,31 @@ function Register() {
 
           </div>
 
-          <button type="submit" className="register-btn">
 
-            Register
+          {/* REGISTER BUTTON */}
+
+          <button
+            type="submit"
+            className="register-btn"
+            disabled={loading}
+          >
+
+            {loading
+              ? "Creating Account..."
+              : "Register"
+            }
 
           </button>
 
         </form>
+
 
         <p className="login-link">
 
           Already have an account?
 
           <Link to="/login">
-
             Login
-
           </Link>
 
         </p>
@@ -128,6 +305,7 @@ function Register() {
     </div>
 
   );
+
 }
 
 export default Register;

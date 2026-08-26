@@ -5,9 +5,36 @@ const jwt = require("jsonwebtoken");
 
 const registerUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, confirmPassword } = req.body;
 
-    const existingUser = await User.findOne({ email });
+
+    if (!name || !email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Please fill all required fields",
+      });
+    }
+
+
+    if (password.length < 6) {
+      return res.status(400).json({
+        success: false,
+        message: "Password must contain at least 6 characters",
+      });
+    }
+
+
+    if (confirmPassword && password !== confirmPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "Passwords do not match",
+      });
+    }
+
+
+    const existingUser = await User.findOne({
+      email: email.toLowerCase(),
+    });
 
     if (existingUser) {
       return res.status(400).json({
@@ -16,26 +43,38 @@ const registerUser = async (req, res) => {
       });
     }
 
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
+
     const newUser = await User.create({
-      name,
-      email,
+      name: name.trim(),
+
+      email: email.toLowerCase().trim(),
+
       password: hashedPassword,
     });
 
+
     res.status(201).json({
       success: true,
+
       message: "User Registered Successfully",
+
       user: {
         id: newUser._id,
+
         name: newUser.name,
+
         email: newUser.email,
       },
     });
   } catch (error) {
+    console.error("Register Error:", error);
+
     res.status(500).json({
       success: false,
+
       message: error.message,
     });
   }
@@ -46,45 +85,83 @@ const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
+
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+
+        message: "Email and password are required",
+      });
+    }
+
+
+    const user = await User.findOne({
+      email: email.toLowerCase().trim(),
+    });
 
     if (!user) {
       return res.status(404).json({
         success: false,
-        message: "User not found",
+
+        message: "User not found. Please register first.",
       });
     }
+
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
       return res.status(401).json({
         success: false,
-        message: "Invalid Password",
+
+        message: "Invalid password",
       });
     }
 
+
+    if (!process.env.JWT_SECRET) {
+      return res.status(500).json({
+        success: false,
+
+        message: "JWT_SECRET is not configured",
+      });
+    }
+
+
     const token = jwt.sign(
-      { id: user._id },
+      {
+        id: user._id,
+      },
+
       process.env.JWT_SECRET,
+
       {
         expiresIn: "7d",
-      }
+      },
     );
+
 
     res.status(200).json({
       success: true,
+
       message: "Login Successful",
-      token,
+
+      token: token,
+
       user: {
         id: user._id,
+
         name: user.name,
+
         email: user.email,
       },
     });
   } catch (error) {
+    console.error("Login Error:", error);
+
     res.status(500).json({
       success: false,
+
       message: error.message,
     });
   }
@@ -92,5 +169,6 @@ const loginUser = async (req, res) => {
 
 module.exports = {
   registerUser,
+
   loginUser,
 };

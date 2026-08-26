@@ -28,8 +28,11 @@ function Navbar() {
         <li>
           <NavLink to="/contact">Contact</NavLink>
         </li>
+        <li>
+    <NavLink to="/settings">Settings</NavLink>
+</li>
       </ul>
-
+       
       <div className="auth-buttons">
         <NavLink to="/login" className="login-btn">
           Login

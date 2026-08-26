@@ -24,10 +24,8 @@ function Predict() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Backend API will be added later
     console.log(formData);
 
-    // Dummy Result
     setResult({
       cost: "₹26,350",
       risk: "Low Risk"

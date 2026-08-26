@@ -7,7 +7,6 @@ function History() {
 
     useEffect(() => {
 
-        // Later replace with API call
         setHistory([
             {
                 id: 1,

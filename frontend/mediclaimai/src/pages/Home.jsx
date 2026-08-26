@@ -2,102 +2,579 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/Home.css";
 
-import logo from "../assests/logo.png";
+// import logo from "../assests/logo.png";
 import hero from "../assests/hero.png";
 
 function Home() {
+
   return (
+
     <div className="home">
-      {/* Hero Section */}
+
 
       <section className="hero">
+
         <div className="hero-left">
-          <img src={logo} alt="Logo" className="hero-logo" />
+
+          <div className="hero-badge">
+            ✨ AI-POWERED INSURANCE INTELLIGENCE
+          </div>
+
+          {/* <img
+            src={logo}
+            alt="MediClaimAI Logo"
+            className="hero-logo"
+          /> */}
 
           <h1>
-            AI Powered
-            <span> Medical Insurance </span>
-            Prediction
+            Smarter Insurance Decisions,
+            <span> Powered by AI.</span>
           </h1>
 
           <p>
-            Predict your medical insurance charges using Machine Learning. Fast,
-            secure and accurate prediction based on your health details.
+            MediClaimAI uses Machine Learning to estimate medical insurance
+            costs based on your personal and health-related information.
+            Get quick, data-driven insights and better understand your
+            potential insurance expenses.
           </p>
 
           <div className="hero-buttons">
+
             <Link to="/predict" className="btn-primary">
-              Predict Now
+              Get Your Prediction →
             </Link>
 
             <Link to="/about" className="btn-secondary">
-              Learn More
+              Explore How It Works
             </Link>
+
           </div>
+
+          <div className="hero-trust">
+
+            <div>
+              <strong>AI</strong>
+              <span>Powered</span>
+            </div>
+
+            <div>
+              <strong>Fast</strong>
+              <span>Results</span>
+            </div>
+
+            <div>
+              <strong>Secure</strong>
+              <span>Data</span>
+            </div>
+
+          </div>
+
         </div>
+
 
         <div className="hero-right">
-          <img src={hero} alt="Medical AI" />
+
+          <div className="hero-glow"></div>
+
+          <img
+            src={hero}
+            alt="AI Medical Insurance Prediction"
+          />
+
+          <div className="floating-card prediction-card">
+
+            <span className="floating-icon">🤖</span>
+
+            <div>
+              <strong>AI Prediction</strong>
+              <p>Smart & Data-Driven</p>
+            </div>
+
+          </div>
+
+          <div className="floating-card result-card">
+
+            <span className="floating-icon">📊</span>
+
+            <div>
+              <strong>Instant Results</strong>
+              <p>Get your estimate quickly</p>
+            </div>
+
+          </div>
+
         </div>
+
       </section>
 
-      {/* Features */}
+
+      {/* ================= STATS ================= */}
+
+      <section className="stats-section">
+
+        <div className="stat">
+
+          <div className="stat-icon">🤖</div>
+
+          <div>
+            <h3>AI-Powered</h3>
+            <p>Machine Learning Predictions</p>
+          </div>
+
+        </div>
+
+        <div className="stat">
+
+          <div className="stat-icon">⚡</div>
+
+          <div>
+            <h3>Instant</h3>
+            <p>Quick Prediction Results</p>
+          </div>
+
+        </div>
+
+        <div className="stat">
+
+          <div className="stat-icon">🔐</div>
+
+          <div>
+            <h3>Secure</h3>
+            <p>Protected User Accounts</p>
+          </div>
+
+        </div>
+
+        <div className="stat">
+
+          <div className="stat-icon">📈</div>
+
+          <div>
+            <h3>Personalized</h3>
+            <p>Data-Based Insights</p>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      {/* ================= WHY CHOOSE ================= */}
 
       <section className="features">
-        <h2>Why Choose MediClaimAI?</h2>
+
+        <div className="section-heading">
+
+          <span>WHY MEDICLAIMAI?</span>
+
+          <h2>
+            Everything You Need to Understand
+            <br />
+            Your Insurance Costs
+          </h2>
+
+          <p>
+            Our intelligent platform combines Machine Learning with a
+            simple and intuitive experience to help you make more informed
+            decisions about potential medical insurance expenses.
+          </p>
+
+        </div>
+
 
         <div className="feature-container">
-          <div className="card">
-            <h3>AI Prediction</h3>
 
-            <p>Predict insurance cost using Machine Learning.</p>
+          <div className="card">
+
+            <div className="card-icon">
+              🤖
+            </div>
+
+            <h3>AI-Powered Prediction</h3>
+
+            <p>
+              Get an estimated medical insurance cost generated by a trained
+              Machine Learning model using relevant personal and health
+              information.
+            </p>
+
+            <Link to="/predict">
+              Try Prediction →
+            </Link>
+
           </div>
 
-          <div className="card">
-            <h3>Secure</h3>
 
-            <p>JWT Authentication keeps your account secure.</p>
+          <div className="card">
+
+            <div className="card-icon">
+              ⚡
+            </div>
+
+            <h3>Fast & Simple</h3>
+
+            <p>
+              Enter your details through a simple form and receive your
+              estimated insurance cost within seconds without complicated
+              calculations.
+            </p>
+
           </div>
 
+
           <div className="card">
+
+            <div className="card-icon">
+              📊
+            </div>
+
+            <h3>Risk Insights</h3>
+
+            <p>
+              Understand your prediction through a clear risk-level
+              assessment designed to make the results easier to interpret.
+            </p>
+
+          </div>
+
+
+          <div className="card">
+
+            <div className="card-icon">
+              📜
+            </div>
+
             <h3>Prediction History</h3>
 
-            <p>View all your previous insurance predictions.</p>
+            <p>
+              Keep track of your previous predictions and revisit your
+              results whenever you need them through your personal account.
+            </p>
+
           </div>
+
+
+          <div className="card">
+
+            <div className="card-icon">
+              🔐
+            </div>
+
+            <h3>Secure Accounts</h3>
+
+            <p>
+              Your account is protected with secure authentication,
+              allowing you to manage your personal information and
+              prediction history safely.
+            </p>
+
+          </div>
+
+
+          <div className="card">
+
+            <div className="card-icon">
+              📱
+            </div>
+
+            <h3>User-Friendly Experience</h3>
+
+            <p>
+              Designed with a clean and responsive interface that makes
+              insurance cost estimation easy to access from different
+              devices.
+            </p>
+
+          </div>
+
         </div>
+
       </section>
 
-      {/* How It Works */}
+
+      {/* ================= HOW IT WORKS ================= */}
 
       <section className="steps">
-        <h2>How It Works</h2>
+
+        <div className="section-heading">
+
+          <span>HOW IT WORKS</span>
+
+          <h2>
+            Get Your Insurance Estimate
+            <br />
+            in 4 Simple Steps
+          </h2>
+
+          <p>
+            Our streamlined process makes it easy to generate an
+            AI-based estimate in just a few steps.
+          </p>
+
+        </div>
+
 
         <div className="step-container">
-          <div className="step">
-            <h3>1</h3>
-
-            <p>Register/Login</p>
-          </div>
 
           <div className="step">
-            <h3>2</h3>
 
-            <p>Enter Health Details</p>
+            <div className="step-number">
+              01
+            </div>
+
+            <h3>Create Your Account</h3>
+
+            <p>
+              Register securely and create your personal MediClaimAI account
+              to access the prediction platform.
+            </p>
+
           </div>
+
 
           <div className="step">
-            <h3>3</h3>
 
-            <p>AI Predicts Insurance Cost</p>
+            <div className="step-number">
+              02
+            </div>
+
+            <h3>Enter Your Details</h3>
+
+            <p>
+              Provide relevant information such as age, BMI, smoking status,
+              number of children, gender, and region.
+            </p>
+
           </div>
+
 
           <div className="step">
-            <h3>4</h3>
 
-            <p>Save Prediction</p>
+            <div className="step-number">
+              03
+            </div>
+
+            <h3>AI Analyzes Your Data</h3>
+
+            <p>
+              Our trained Machine Learning model processes the information
+              and generates an estimated insurance cost.
+            </p>
+
           </div>
+
+
+          <div className="step">
+
+            <div className="step-number">
+              04
+            </div>
+
+            <h3>View Your Results</h3>
+
+            <p>
+              Get your estimated insurance cost and risk level, then save
+              the prediction to your account for future reference.
+            </p>
+
+          </div>
+
         </div>
+
       </section>
+
+
+      {/* ================= AI BENEFITS ================= */}
+
+      <section className="ai-section">
+
+        <div className="ai-content">
+
+          <span>INTELLIGENT INSIGHTS</span>
+
+          <h2>
+            Turn Your Data Into
+            <br />
+            Meaningful Insights
+          </h2>
+
+          <p>
+            Medical insurance costs can vary depending on multiple factors.
+            MediClaimAI analyzes important user-provided information to
+            generate an estimated cost and provide a simplified risk
+            assessment.
+          </p>
+
+          <div className="ai-points">
+
+            <div>
+              <span>✓</span>
+              <p>Data-driven insurance cost estimation</p>
+            </div>
+
+            <div>
+              <span>✓</span>
+              <p>Easy-to-understand prediction results</p>
+            </div>
+
+            <div>
+              <span>✓</span>
+              <p>Personalized insights based on your details</p>
+            </div>
+
+            <div>
+              <span>✓</span>
+              <p>Secure access to your prediction history</p>
+            </div>
+
+          </div>
+
+          <Link to="/predict" className="btn-primary">
+            Start Your Prediction →
+          </Link>
+
+        </div>
+
+        <div className="ai-visual">
+
+          <div className="ai-circle">
+
+            <div className="ai-inner">
+
+              <span>AI</span>
+
+              <p>Smart Prediction</p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      {/* ================= WHO CAN USE ================= */}
+
+      <section className="audience-section">
+
+        <div className="section-heading">
+
+          <span>BUILT FOR EVERYONE</span>
+
+          <h2>
+            Who Can Use MediClaimAI?
+          </h2>
+
+          <p>
+            Whether you are exploring insurance options or simply want to
+            understand potential healthcare expenses, MediClaimAI provides
+            an accessible way to explore estimated costs.
+          </p>
+
+        </div>
+
+
+        <div className="audience-container">
+
+          <div className="audience-card">
+
+            <span>👤</span>
+
+            <h3>Individuals</h3>
+
+            <p>
+              Understand how your personal and health-related factors may
+              influence estimated insurance costs.
+            </p>
+
+          </div>
+
+
+          <div className="audience-card">
+
+            <span>👨‍👩‍👧</span>
+
+            <h3>Families</h3>
+
+            <p>
+              Explore estimated costs based on family-related information
+              such as number of children and other factors.
+            </p>
+
+          </div>
+
+
+          <div className="audience-card">
+
+            <span>🎓</span>
+
+            <h3>Students & Learners</h3>
+
+            <p>
+              Explore how Machine Learning can be applied to real-world
+              healthcare and insurance prediction problems.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      {/* ================= DISCLAIMER ================= */}
+
+      <section className="disclaimer">
+
+        <div className="disclaimer-icon">
+          ℹ️
+        </div>
+
+        <div>
+
+          <h3>Important Information</h3>
+
+          <p>
+            MediClaimAI provides machine learning-based estimates for
+            informational and educational purposes only. Prediction results
+            are not official insurance quotations, medical advice, or a
+            guarantee of actual insurance costs. Actual costs may vary
+            depending on individual circumstances and insurance providers.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      {/* ================= FINAL CTA ================= */}
+
+      <section className="final-cta">
+
+        <div>
+
+          <span>READY TO GET STARTED?</span>
+
+          <h2>
+            Explore Your Potential
+            <br />
+            Insurance Cost Today.
+          </h2>
+
+          <p>
+            Enter a few details and let MediClaimAI provide you with an
+            AI-powered estimate in just a few moments.
+          </p>
+
+          <Link to="/predict" className="cta-button">
+            Get Your Prediction →
+          </Link>
+
+        </div>
+
+      </section>
+
     </div>
   );
 }

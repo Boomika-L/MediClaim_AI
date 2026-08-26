@@ -15,8 +15,9 @@ import Predict from "./pages/Predict";
 import PredictionHistory from "./pages/PredictionHistory";
 import Profile from "./pages/Profile";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsConditions from "./pages/TermsConditions";
+import Terms from "./pages/Terms";
 import History from "./pages/History";
+import Settings from "./pages/Settings";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       <Routes>
         <Route path="/history" element={<History />} />
         <Route path="/" element={<Home />} />
+        <Route path="/settings" element={<Settings />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/faq" element={<FAQ />} />
@@ -39,7 +41,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
 
         <Route path="/privacy" element={<PrivacyPolicy />} />
-        <Route path="/terms" element={<TermsConditions />} />
+        <Route path="/terms" element={<Terms/>} />
 
       </Routes>
 

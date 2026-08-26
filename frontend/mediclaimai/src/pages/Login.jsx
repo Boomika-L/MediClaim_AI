@@ -1,21 +1,84 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/Login.css";
 
 function Login() {
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log({
-      email,
-      password,
-    });
+    setError("");
+    setLoading(true);
 
-    // API call will be added later
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/auth/login",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      console.log("Login Response:", data);
+
+      if (!response.ok) {
+        setError(
+          data.message || "Invalid email or password"
+        );
+
+        setLoading(false);
+        return;
+      }
+
+      /*
+        Save JWT token
+      */
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+      }
+
+      /*
+        Save user information
+      */
+      if (data.user) {
+        localStorage.setItem(
+          "user",
+          JSON.stringify(data.user)
+        );
+      }
+
+      /*
+        Login successful
+        Navigate to dashboard
+      */
+      navigate("/dashboard");
+
+    } catch (error) {
+      console.error("Login Error:", error);
+
+      setError(
+        "Unable to connect to the server. Please make sure the backend is running."
+      );
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -27,6 +90,12 @@ function Login() {
 
         <p>Welcome Back</p>
 
+        {error && (
+          <div className="login-error">
+            {error}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit}>
 
           <div className="input-group">
@@ -37,11 +106,14 @@ function Login() {
               type="email"
               placeholder="Enter your email"
               value={email}
-              onChange={(e)=>setEmail(e.target.value)}
+              onChange={(e) =>
+                setEmail(e.target.value)
+              }
               required
             />
 
           </div>
+
 
           <div className="input-group">
 
@@ -51,11 +123,14 @@ function Login() {
               type="password"
               placeholder="Enter your password"
               value={password}
-              onChange={(e)=>setPassword(e.target.value)}
+              onChange={(e) =>
+                setPassword(e.target.value)
+              }
               required
             />
 
           </div>
+
 
           <div className="forgot">
 
@@ -65,22 +140,26 @@ function Login() {
 
           </div>
 
-          <button className="login-btn">
 
-            Login
-
+          <button
+            type="submit"
+            className="login-btn"
+            disabled={loading}
+          >
+            {loading
+              ? "Logging in..."
+              : "Login"}
           </button>
 
         </form>
+
 
         <p className="register-text">
 
           Don't have an account?
 
           <Link to="/register">
-
             Register
-
           </Link>
 
         </p>

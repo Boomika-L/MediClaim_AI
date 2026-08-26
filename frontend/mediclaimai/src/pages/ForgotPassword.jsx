@@ -11,7 +11,7 @@ function ForgotPassword() {
 
         console.log(email);
 
-        // API call will be added later
+        
     };
 
     return (

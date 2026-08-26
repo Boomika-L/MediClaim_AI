@@ -12,7 +12,7 @@ import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import Dashboard from "./pages/Dashboard";
 import Predict from "./pages/Predict";
-import PredictionHistory from "./pages/PredictionHistory";
+// import PredictionHistory from "./pages/PredictionHistory";
 import Profile from "./pages/Profile";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
@@ -37,7 +37,7 @@ function App() {
 
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/predict" element={<Predict />} />
-        <Route path="/history" element={<PredictionHistory />} />
+        {/* <Route path="/history" element={<PredictionHistory />} /> */}
         <Route path="/profile" element={<Profile />} />
 
         <Route path="/privacy" element={<PrivacyPolicy />} />

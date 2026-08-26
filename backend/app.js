@@ -15,6 +15,11 @@ app.get("/", (req, res) => {
     message: "Medical Insurance Prediction API Running",
   });
 });
+app.use(
+    "/api/predictions",
+    predictionRoutes
+);
+
 
 app.use("/api/auth", authRoutes);
 app.use("/api/predict", predictionRoutes);

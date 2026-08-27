@@ -21,6 +21,22 @@ const userSchema = new mongoose.Schema(
       required: true,
       minlength: 6,
     },
+
+    age: {
+      type: Number,
+      default: null,
+    },
+
+    gender: {
+      type: String,
+      enum: ["Male", "Female", "Other"],
+      default: "Other",
+    },
+
+    phone: {
+      type: String,
+      default: "",
+    },
   },
   {
     timestamps: true,

@@ -3,6 +3,7 @@ const cors = require("cors");
 
 const authRoutes = require("./routes/authRoutes");
 const predictionRoutes = require("./routes/predictionRoutes");
+const profileRoutes = require("./routes/profileRoutes");
 const app = express();
 
 app.use(cors());
@@ -20,7 +21,7 @@ app.use(
     predictionRoutes
 );
 
-
+app.use("/api/profile", profileRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/predict", predictionRoutes);
 module.exports = app;

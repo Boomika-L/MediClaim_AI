@@ -1,46 +1,61 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
 import pandas as pd
-import joblib
+import matplotlib.pyplot as plt
 
-app = Flask(__name__)
-CORS(app)
+# Load dataset
+df = pd.read_csv("../indian_healthcare_patient_records.csv")
 
-# Load trained model
-model = joblib.load("models/best_model.pkl")
+# Basic information
+print("Dataset Shape:", df.shape)
 
-@app.route("/")
-def home():
-    return jsonify({
-        "message": "Medical Insurance Prediction API is Running"
-    })
+print("\nColumns:")
+print(df.columns.tolist())
 
-@app.route("/predict", methods=["POST"])
-def predict():
-    try:
-        data = request.get_json()
+print("\nFirst 5 Records:")
+print(df.head())
 
-        input_data = pd.DataFrame({
-            "age": [data["age"]],
-            "sex": [data["sex"]],
-            "bmi": [data["bmi"]],
-            "children": [data["children"]],
-            "smoker": [data["smoker"]],
-            "region": [data["region"]]
-        })
+print("\nData Types:")
+print(df.dtypes)
 
-        prediction = model.predict(input_data)
+print("\nMissing Values:")
+print(df.isnull().sum())
 
-        return jsonify({
-            "success": True,
-            "predicted_cost": round(float(prediction[0]), 2)
-        })
+print("\nDuplicate Records:")
+print(df.duplicated().sum())
 
-    except Exception as e:
-        return jsonify({
-            "success": False,
-            "error": str(e)
-        })
+print("\nStatistical Summary:")
+print(df.describe())
 
-if __name__ == "__main__":
-    app.run(debug=True, port=5001)
+# Categorical information
+print("\nPrimary Diagnosis:")
+print(df["Primary_Diagnosis"].value_counts())
+
+print("\nTreatment Type:")
+print(df["Treatment_Type"].value_counts())
+
+print("\nHospital Type:")
+print(df["Hospital_Type"].value_counts())
+
+print("\nInsurance Covered:")
+print(df["Insurance_Covered"].value_counts())
+
+# Simple graphs
+
+plt.figure(figsize=(8,5))
+df["Primary_Diagnosis"].value_counts().plot(kind="bar")
+plt.title("Primary Diagnosis Distribution")
+plt.xlabel("Diagnosis")
+plt.ylabel("Number of Patients")
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+plt.figure(figsize=(8,5))
+df["Treatment_Type"].value_counts().plot(kind="bar")
+plt.title("Treatment Type Distribution")
+plt.xlabel("Treatment")
+plt.ylabel("Number of Patients")
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+print("\nData Analysis Completed Successfully!")

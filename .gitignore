@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+.venv/
+
+# ML generated files
+ml/outputs/*.pkl
+
+# Dataset/output files
+ml/outputs/*.csv

@@ -1,61 +1,119 @@
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 import pandas as pd
-import matplotlib.pyplot as plt
+import joblib
 
-# Load dataset
-df = pd.read_csv("../indian_healthcare_patient_records.csv")
+app = Flask(__name__)
+CORS(app)
 
-# Basic information
-print("Dataset Shape:", df.shape)
+model = joblib.load(
+    "outputs/best_medical_cost_model.pkl"
+)
 
-print("\nColumns:")
-print(df.columns.tolist())
+print("Medical Cost Model Loaded Successfully!")
 
-print("\nFirst 5 Records:")
-print(df.head())
 
-print("\nData Types:")
-print(df.dtypes)
+@app.route("/", methods=["GET"])
+def home():
+    return jsonify({
+        "message": "MediClaimAI ML API is running"
+    })
 
-print("\nMissing Values:")
-print(df.isnull().sum())
 
-print("\nDuplicate Records:")
-print(df.duplicated().sum())
+@app.route("/predict", methods=["POST"])
+def predict():
 
-print("\nStatistical Summary:")
-print(df.describe())
+    try:
 
-# Categorical information
-print("\nPrimary Diagnosis:")
-print(df["Primary_Diagnosis"].value_counts())
+        data = request.json
 
-print("\nTreatment Type:")
-print(df["Treatment_Type"].value_counts())
+        # Create patient dataframe
+        patient = pd.DataFrame([{
 
-print("\nHospital Type:")
-print(df["Hospital_Type"].value_counts())
+            "Age": data["age"],
 
-print("\nInsurance Covered:")
-print(df["Insurance_Covered"].value_counts())
+            "Gender": data["gender"],
 
-# Simple graphs
+            "Region": data["region"],
 
-plt.figure(figsize=(8,5))
-df["Primary_Diagnosis"].value_counts().plot(kind="bar")
-plt.title("Primary Diagnosis Distribution")
-plt.xlabel("Diagnosis")
-plt.ylabel("Number of Patients")
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.show()
+            "Socioeconomic_Status":
+                data["socioeconomic_status"],
 
-plt.figure(figsize=(8,5))
-df["Treatment_Type"].value_counts().plot(kind="bar")
-plt.title("Treatment Type Distribution")
-plt.xlabel("Treatment")
-plt.ylabel("Number of Patients")
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.show()
+            "Primary_Diagnosis":
+                data["primary_diagnosis"],
 
-print("\nData Analysis Completed Successfully!")
+            "Blood_Glucose_mg_dL":
+                data["blood_glucose"],
+
+            "HbA1c_%":
+                data["hba1c"],
+
+            "Total_Cholesterol_mg_dL":
+                data["cholesterol"],
+
+            "Treatment_Type":
+                data["treatment_type"],
+
+            "Treatment_Outcome":
+                data["treatment_outcome"],
+
+            "Imaging_Type":
+                data["imaging_type"],
+
+            "Hospital_Type":
+                data["hospital_type"],
+
+            "Insurance_Covered":
+                data["insurance_covered"],
+
+            "BMI":
+                data["bmi"]
+
+        }])
+        predicted_cost = model.predict(patient)[0]
+
+
+        if predicted_cost < 10000:
+
+            category = "Low"
+
+        elif predicted_cost < 25000:
+
+            category = "Medium"
+
+        else:
+
+            category = "High"
+
+
+        return jsonify({
+
+            "success": True,
+
+            "predicted_cost":
+                round(float(predicted_cost), 2),
+
+            "cost_category":
+                category
+
+        })
+
+
+    except Exception as error:
+
+        return jsonify({
+
+            "success": False,
+
+            "message": str(error)
+
+        }), 500
+
+
+if __name__ == "__main__":
+
+    app.run(
+        host="127.0.0.1",
+        port=5001,
+        debug=True
+    )

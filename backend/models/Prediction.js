@@ -13,22 +13,7 @@ const predictionSchema = new mongoose.Schema(
       required: true,
     },
 
-    sex: {
-      type: String,
-      required: true,
-    },
-
-    bmi: {
-      type: Number,
-      required: true,
-    },
-
-    children: {
-      type: Number,
-      required: true,
-    },
-
-    smoker: {
+    gender: {
       type: String,
       required: true,
     },
@@ -38,20 +23,74 @@ const predictionSchema = new mongoose.Schema(
       required: true,
     },
 
+    socioeconomicStatus: {
+      type: String,
+      required: true,
+    },
+
+    primaryDiagnosis: {
+      type: String,
+      required: true,
+    },
+
+    bloodGlucose: {
+      type: Number,
+      required: true,
+    },
+
+    hba1c: {
+      type: Number,
+      required: true,
+    },
+
+    cholesterol: {
+      type: Number,
+      required: true,
+    },
+
+    treatmentType: {
+      type: String,
+      required: true,
+    },
+
+    treatmentOutcome: {
+      type: String,
+      required: true,
+    },
+
+    imagingType: {
+      type: String,
+      required: true,
+    },
+
+    hospitalType: {
+      type: String,
+      required: true,
+    },
+
+    insuranceCovered: {
+      type: Boolean,
+      required: true,
+    },
+
+    bmi: {
+      type: Number,
+      required: true,
+    },
+
     predictedCost: {
       type: Number,
       required: true,
     },
 
-    riskLevel: {
+    costCategory: {
       type: String,
-      enum: ["Low", "Medium", "High"],
-      default: "Low",
+      required: true,
     },
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 module.exports = mongoose.model("Prediction", predictionSchema);

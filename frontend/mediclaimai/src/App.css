@@ -27,6 +27,237 @@
 .App-link {
   color: #61dafb;
 }
+/* =========================================
+   GLOBAL DARK MODE
+   ========================================= */
+
+body.dark-mode {
+  background: #111827;
+  color: #f9fafb;
+}
+
+/* Main page containers */
+
+body.dark-mode .home-container,
+body.dark-mode .about-container,
+body.dark-mode .contact-container,
+body.dark-mode .dashboard-container,
+body.dark-mode .faq-container,
+body.dark-mode .history-container,
+body.dark-mode .predict-container,
+body.dark-mode .profile-container,
+body.dark-mode .settings-container,
+body.dark-mode .privacy-container,
+body.dark-mode .terms-container {
+  background: #111827;
+  color: #f9fafb;
+}
+
+
+/* Cards */
+
+body.dark-mode .card,
+body.dark-mode .dashboard-card,
+body.dark-mode .predict-card,
+body.dark-mode .history-card,
+body.dark-mode .profile-card,
+body.dark-mode .settings-card,
+body.dark-mode .faq-card,
+body.dark-mode .about-card,
+body.dark-mode .contact-card {
+  background: #1f2937;
+  color: #f9fafb;
+  border-color: #374151;
+}
+
+
+/* Headings */
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+  color: #f9fafb;
+}
+
+
+/* Paragraphs */
+
+body.dark-mode p {
+  color: #d1d5db;
+}
+
+
+/* Navbar */
+
+body.dark-mode .navbar {
+  background: #1f2937;
+  color: #f9fafb;
+}
+
+body.dark-mode .navbar a {
+  color: #f9fafb;
+}
+
+body.dark-mode .navbar a:hover {
+  color: #34d399;
+}
+
+
+/* Footer */
+
+body.dark-mode .footer {
+  background: #111827;
+  color: #f9fafb;
+}
+
+body.dark-mode .footer a {
+  color: #d1d5db;
+}
+
+
+/* Forms */
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+  background: #374151;
+  color: #f9fafb;
+  border-color: #4b5563;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: #9ca3af;
+}
+
+
+/* Labels */
+
+body.dark-mode label {
+  color: #f9fafb;
+}
+
+
+/* Tables */
+
+body.dark-mode table {
+  background: #1f2937;
+  color: #f9fafb;
+}
+
+body.dark-mode th {
+  background: #374151;
+  color: #f9fafb;
+}
+
+body.dark-mode td {
+  color: #e5e7eb;
+  border-color: #374151;
+}
+
+body.dark-mode tr {
+  border-color: #374151;
+}
+
+
+
+body.dark-mode .table-wrapper {
+  background: #1f2937;
+}
+
+
+
+body.dark-mode button {
+  color: white;
+}
+
+body.dark-mode a {
+  color: #34d399;
+}
+
+
+
+body.dark-mode .history-message,
+body.dark-mode .error-message,
+body.dark-mode .prediction-error {
+  background: #1f2937;
+  color: #f9fafb;
+}
+
+
+
+body.dark-mode .result-card {
+  background: #1f2937;
+  color: #f9fafb;
+}
+
+body.dark-mode .result-card p {
+  color: #d1d5db;
+}
+
+
+body.dark-mode .stat-card,
+body.dark-mode .dashboard-stat,
+body.dark-mode .dashboard-card {
+  background: #1f2937;
+  color: #f9fafb;
+  border-color: #374151;
+}
+
+
+
+body.dark-mode .profile-info,
+body.dark-mode .profile-section {
+  background: #1f2937;
+  color: #f9fafb;
+}
+
+
+
+body.dark-mode .faq-item {
+  background: #1f2937;
+  color: #f9fafb;
+  border-color: #374151;
+}
+
+
+
+body.dark-mode .about-content,
+body.dark-mode .contact-form,
+body.dark-mode .contact-info {
+  background: #1f2937;
+  color: #f9fafb;
+}
+
+
+
+body.dark-mode .login-container,
+body.dark-mode .register-container,
+body.dark-mode .forgot-password-container {
+  background: #111827;
+}
+
+body.dark-mode .login-card,
+body.dark-mode .register-card,
+body.dark-mode .forgot-password-card {
+  background: #1f2937;
+  color: #f9fafb;
+}
+
+
+
+body.dark-mode .privacy-container,
+body.dark-mode .terms-container {
+  color: #f9fafb;
+}
+
+body.dark-mode .privacy-container p,
+body.dark-mode .terms-container p {
+  color: #d1d5db;
+}
 
 @keyframes App-logo-spin {
   from {

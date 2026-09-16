@@ -2,13 +2,23 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import pandas as pd
 import joblib
+import os
 
 app = Flask(__name__)
 CORS(app)
 
-model = joblib.load(
-    "outputs/best_medical_cost_model.pkl"
+# Get the directory where app.py is located
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Model path
+MODEL_PATH = os.path.join(
+    BASE_DIR,
+    "outputs",
+    "best_medical_cost_model.pkl"
 )
+
+# Load ML model
+model = joblib.load(MODEL_PATH)
 
 print("Medical Cost Model Loaded Successfully!")
 
@@ -27,7 +37,6 @@ def predict():
 
         data = request.json
 
-        # Create patient dataframe
         patient = pd.DataFrame([{
 
             "Age": data["age"],
@@ -70,21 +79,17 @@ def predict():
                 data["bmi"]
 
         }])
+
         predicted_cost = model.predict(patient)[0]
 
-
         if predicted_cost < 10000:
-
             category = "Low"
 
         elif predicted_cost < 25000:
-
             category = "Medium"
 
         else:
-
             category = "High"
-
 
         return jsonify({
 
@@ -97,7 +102,6 @@ def predict():
                 category
 
         })
-
 
     except Exception as error:
 
@@ -113,7 +117,7 @@ def predict():
 if __name__ == "__main__":
 
     app.run(
-        host="127.0.0.1",
-        port=5001,
-        debug=True
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5001)),
+        debug=False
     )

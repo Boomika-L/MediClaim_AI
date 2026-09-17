@@ -19,47 +19,50 @@ function Profile() {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          navigate("/login");
+          return;
+        }
+
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/api/profile`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || "Unable to load profile");
+        }
+
+        setUser({
+          name: data.user.name || "",
+          email: data.user.email || "",
+          age: data.user.age || "",
+          gender: data.user.gender || "Other",
+          phone: data.user.phone || "",
+        });
+
+        localStorage.setItem("user", JSON.stringify(data.user));
+      } catch (error) {
+        console.error("Profile Error:", error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchProfile();
-  }, []);
-
-  const fetchProfile = async () => {
-    try {
-      const token = localStorage.getItem("token");
-
-      if (!token) {
-        navigate("/login");
-        return;
-      }
-
-      const response = await fetch("http://localhost:5000/api/profile", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Unable to load profile");
-      }
-
-      setUser({
-        name: data.user.name || "",
-        email: data.user.email || "",
-        age: data.user.age || "",
-        gender: data.user.gender || "Other",
-        phone: data.user.phone || "",
-      });
-
-      localStorage.setItem("user", JSON.stringify(data.user));
-    } catch (error) {
-      console.error("Profile Error:", error);
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [navigate]);
 
   const handleChange = (e) => {
     setUser({
@@ -83,21 +86,24 @@ function Profile() {
         return;
       }
 
-      const response = await fetch("http://localhost:5000/api/profile", {
-        method: "PUT",
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/profile`,
+        {
+          method: "PUT",
 
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
 
-        body: JSON.stringify({
-          name: user.name,
-          age: user.age,
-          gender: user.gender,
-          phone: user.phone,
-        }),
-      });
+          body: JSON.stringify({
+            name: user.name,
+            age: user.age,
+            gender: user.gender,
+            phone: user.phone,
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -193,11 +199,13 @@ function Profile() {
             <div className="profile-field">
               <label>Gender</label>
 
-              <select name="gender" value={user.gender} onChange={handleChange}>
+              <select
+                name="gender"
+                value={user.gender}
+                onChange={handleChange}
+              >
                 <option value="Male">Male</option>
-
                 <option value="Female">Female</option>
-
                 <option value="Other">Other</option>
               </select>
             </div>
@@ -215,7 +223,6 @@ function Profile() {
             </div>
           </div>
 
-          {/* UPDATE BUTTON */}
           <button type="submit" className="update-btn" disabled={saving}>
             {saving ? "Updating..." : "Update Profile"}
           </button>

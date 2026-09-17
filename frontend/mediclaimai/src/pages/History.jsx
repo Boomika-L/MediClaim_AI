@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/History.css";
@@ -20,7 +21,7 @@ function History() {
         }
 
         const response = await fetch(
-          "http://localhost:5000/api/predictions/history",
+          `${process.env.REACT_APP_API_URL}/api/predictions/history`,
           {
             method: "GET",
             headers: {

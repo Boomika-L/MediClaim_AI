@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/Home.css";
 
-// import logo from "../assests/logo.png";
 import hero from "../assests/hero.png";
 
 function Home() {
@@ -20,11 +19,7 @@ function Home() {
             ✨ AI-POWERED INSURANCE INTELLIGENCE
           </div>
 
-          {/* <img
-            src={logo}
-            alt="MediClaimAI Logo"
-            className="hero-logo"
-          /> */}
+         
 
           <h1>
             Smarter Insurance Decisions,
@@ -108,7 +103,6 @@ function Home() {
       </section>
 
 
-      {/* ================= STATS ================= */}
 
       <section className="stats-section">
 
@@ -159,7 +153,6 @@ function Home() {
       </section>
 
 
-      {/* ================= WHY CHOOSE ================= */}
 
       <section className="features">
 
@@ -292,7 +285,6 @@ function Home() {
       </section>
 
 
-      {/* ================= HOW IT WORKS ================= */}
 
       <section className="steps">
 
@@ -384,7 +376,6 @@ function Home() {
       </section>
 
 
-      {/* ================= AI BENEFITS ================= */}
 
       <section className="ai-section">
 
@@ -454,7 +445,6 @@ function Home() {
       </section>
 
 
-      {/* ================= WHO CAN USE ================= */}
 
       <section className="audience-section">
 
@@ -523,7 +513,6 @@ function Home() {
       </section>
 
 
-      {/* ================= DISCLAIMER ================= */}
 
       <section className="disclaimer">
 
@@ -548,7 +537,6 @@ function Home() {
       </section>
 
 
-      {/* ================= FINAL CTA ================= */}
 
       <section className="final-cta">
 

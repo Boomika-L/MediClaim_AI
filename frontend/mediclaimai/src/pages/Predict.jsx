@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Predict.css";
@@ -49,44 +50,47 @@ function Predict() {
         return;
       }
 
-      const response = await fetch("http://localhost:5000/api/predictions", {
-        method: "POST",
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/predictions`,
+        {
+          method: "POST",
 
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
 
-        body: JSON.stringify({
-          age: Number(formData.age),
+          body: JSON.stringify({
+            age: Number(formData.age),
 
-          gender: formData.gender,
+            gender: formData.gender,
 
-          region: formData.region,
+            region: formData.region,
 
-          socioeconomic_status: formData.socioeconomic_status,
+            socioeconomic_status: formData.socioeconomic_status,
 
-          primary_diagnosis: formData.primary_diagnosis,
+            primary_diagnosis: formData.primary_diagnosis,
 
-          blood_glucose: Number(formData.blood_glucose),
+            blood_glucose: Number(formData.blood_glucose),
 
-          hba1c: Number(formData.hba1c),
+            hba1c: Number(formData.hba1c),
 
-          cholesterol: Number(formData.cholesterol),
+            cholesterol: Number(formData.cholesterol),
 
-          treatment_type: formData.treatment_type,
+            treatment_type: formData.treatment_type,
 
-          treatment_outcome: formData.treatment_outcome,
+            treatment_outcome: formData.treatment_outcome,
 
-          imaging_type: formData.imaging_type,
+            imaging_type: formData.imaging_type,
 
-          hospital_type: formData.hospital_type,
+            hospital_type: formData.hospital_type,
 
-          insurance_covered: formData.insurance_covered === "true",
+            insurance_covered: formData.insurance_covered === "true",
 
-          bmi: Number(formData.bmi),
-        }),
-      });
+            bmi: Number(formData.bmi),
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -100,9 +104,12 @@ function Predict() {
         const prediction = data.prediction;
 
         setResult({
-          cost: `₹${Number(prediction.predictedCost).toLocaleString("en-IN", {
-            maximumFractionDigits: 2,
-          })}`,
+          cost: `₹${Number(prediction.predictedCost).toLocaleString(
+            "en-IN",
+            {
+              maximumFractionDigits: 2,
+            }
+          )}`,
 
           category: prediction.costCategory,
 
@@ -132,7 +139,7 @@ function Predict() {
 
         <form onSubmit={handleSubmit}>
           <div className="form-grid">
-            {/* AGE */}
+
 
             <div>
               <label>Age</label>
@@ -416,16 +423,19 @@ function Predict() {
                 <option value="false">No</option>
               </select>
             </div>
+
           </div>
 
-          {/* BUTTON */}
 
-          <button type="submit" className="predict-btn" disabled={loading}>
+          <button
+            type="submit"
+            className="predict-btn"
+            disabled={loading}
+          >
             {loading ? "Predicting..." : "Predict Medical Cost"}
           </button>
         </form>
 
-        {/* RESULT */}
 
         {result && (
           <div className="result-card">
@@ -433,12 +443,15 @@ function Predict() {
 
             <h2>Prediction Result</h2>
 
-            <p className="result-label">Estimated Medical Cost</p>
+            <p className="result-label">
+              Estimated Medical Cost
+            </p>
 
             <h3>{result.cost}</h3>
 
             <div className="result-risk">
               Cost Category:
+
               <span className={result.category.toLowerCase()}>
                 {result.category}
               </span>
@@ -451,6 +464,7 @@ function Predict() {
             </p>
           </div>
         )}
+
       </div>
     </div>
   );

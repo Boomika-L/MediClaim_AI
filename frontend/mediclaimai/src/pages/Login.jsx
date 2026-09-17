@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/Login.css";
@@ -19,7 +20,7 @@ function Login() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/auth/login",
+        `${process.env.REACT_APP_API_URL}/api/auth/login`,
         {
           method: "POST",
 
@@ -114,7 +115,6 @@ function Login() {
 
           </div>
 
-
           <div className="input-group">
 
             <label>Password</label>
@@ -131,7 +131,6 @@ function Login() {
 
           </div>
 
-
           <div className="forgot">
 
             <Link to="/forgot-password">
@@ -139,7 +138,6 @@ function Login() {
             </Link>
 
           </div>
-
 
           <button
             type="submit"
@@ -152,7 +150,6 @@ function Login() {
           </button>
 
         </form>
-
 
         <p className="register-text">
 

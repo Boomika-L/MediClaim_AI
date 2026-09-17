@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import "../styles/Register.css";
 
 function Register() {
-
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -17,63 +16,46 @@ function Register() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-
   const handleChange = (e) => {
-
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
-
   };
 
-
   const handleSubmit = async (e) => {
-
     e.preventDefault();
 
     setError("");
     setSuccess("");
 
-
     // Check password
-
     if (
       formData.password !==
       formData.confirmPassword
     ) {
-
       setError("Passwords do not match");
-
       return;
     }
 
-
     // Check password length
-
     if (formData.password.length < 6) {
-
       setError(
         "Password must contain at least 6 characters"
       );
-
       return;
     }
 
-
     setLoading(true);
 
-
     try {
-
       console.log(
         "Sending registration data:",
         formData
       );
 
-
       const response = await fetch(
-        "http://localhost:5000/api/auth/register",
+        `${process.env.REACT_APP_API_URL}/api/auth/register`,
         {
           method: "POST",
 
@@ -85,18 +67,14 @@ function Register() {
         }
       );
 
-
       const data = await response.json();
-
 
       console.log(
         "Register Response:",
         data
       );
 
-
       if (!response.ok) {
-
         setError(
           data.message ||
           "Registration failed"
@@ -107,14 +85,11 @@ function Register() {
         return;
       }
 
-
       setSuccess(
         "Registration successful! Redirecting to login..."
       );
 
-
       // Clear form
-
       setFormData({
         name: "",
         email: "",
@@ -122,18 +97,12 @@ function Register() {
         confirmPassword: ""
       });
 
-
       // Redirect to login
-
       setTimeout(() => {
-
         navigate("/login");
-
       }, 1500);
 
-
     } catch (error) {
-
       console.error(
         "Registration Error:",
         error
@@ -144,16 +113,11 @@ function Register() {
       );
 
     } finally {
-
       setLoading(false);
-
     }
-
   };
 
-
   return (
-
     <div className="register-container">
 
       <div className="register-box">
@@ -166,34 +130,23 @@ function Register() {
           Join MediClaimAI Today
         </p>
 
-
         {/* ERROR MESSAGE */}
-
         {error && (
-
           <div className="register-error">
             {error}
           </div>
-
         )}
 
-
         {/* SUCCESS MESSAGE */}
-
         {success && (
-
           <div className="register-success">
             {success}
           </div>
-
         )}
-
 
         <form onSubmit={handleSubmit}>
 
-
           {/* NAME */}
-
           <div className="input-group">
 
             <label>
@@ -211,9 +164,7 @@ function Register() {
 
           </div>
 
-
           {/* EMAIL */}
-
           <div className="input-group">
 
             <label>
@@ -231,9 +182,7 @@ function Register() {
 
           </div>
 
-
           {/* PASSWORD */}
-
           <div className="input-group">
 
             <label>
@@ -251,9 +200,7 @@ function Register() {
 
           </div>
 
-
           {/* CONFIRM PASSWORD */}
-
           <div className="input-group">
 
             <label>
@@ -271,24 +218,19 @@ function Register() {
 
           </div>
 
-
           {/* REGISTER BUTTON */}
-
           <button
             type="submit"
             className="register-btn"
             disabled={loading}
           >
-
             {loading
               ? "Creating Account..."
               : "Register"
             }
-
           </button>
 
         </form>
-
 
         <p className="login-link">
 
@@ -303,9 +245,7 @@ function Register() {
       </div>
 
     </div>
-
   );
-
 }
 
 export default Register;
